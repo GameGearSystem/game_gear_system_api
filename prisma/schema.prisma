@@ -1,0 +1,102 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  active    Boolean  @default(true)
+  confirmed_token                 String?
+  confirmed_at                    DateTime?
+  reset_password_token            String?
+
+  name     String
+  email    String   @unique
+  password String?
+
+  games GameList[]
+}
+
+model Device {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  active    Boolean  @default(true)
+
+  name    String
+  description String?
+
+  requeriments Requeriment[]
+}
+
+model Game {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  active    Boolean  @default(true)
+
+  name   String
+  description String?
+  image_url String?
+
+  requeriments Requeriment[]
+  game_lists GameList[]
+}
+
+model Requeriment {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  active    Boolean  @default(true)
+
+  graphic   String?
+  ram       String?
+  storage   String?
+  processor String?
+
+  game_id Int
+  game    Game @relation(fields: [game_id], references: [id])
+
+  device_id Int
+  device    Device @relation(fields: [device_id], references: [id])
+
+}
+
+model GameList {
+  id        Int      @id @default(autoincrement())
+  uuid      String   @unique @default(uuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  active    Boolean  @default(true)
+
+  game_status  GameStatus
+
+  game_id Int
+  game    Game @relation(fields: [game_id], references: [id])
+
+  user_id Int
+  user    User @relation(fields: [user_id], references: [id])
+}
+
+enum GameStatus {
+  PLAYING
+  FINISHED
+  WANT_TO_PLAY
+  DROPPED
+}

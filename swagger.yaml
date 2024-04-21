@@ -1,0 +1,25 @@
+openapi: 3.0.0
+info:
+  title: API de Ejemplo
+  version: 1.0.0
+  description: Una API de ejemplo para demostrar Swagger en Node.js
+servers:
+  - url: 'http://localhost:3000/'
+paths:
+  /usuarios:
+    get:
+      summary: Retorna una lista de usuarios
+      responses:
+        '200':
+          description: Una lista de usuarios
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    nombre:
+                      type: string
+                    edad:
+                      type: integer
