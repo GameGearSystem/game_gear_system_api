@@ -1,3 +1,8 @@
+export interface UserDto {
+    uuid: string;
+    name: string;
+    email: string;
+}
 export interface RegisterDto {
     user: UserCreateDto;
 }

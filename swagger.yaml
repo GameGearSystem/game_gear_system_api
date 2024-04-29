@@ -6,20 +6,70 @@ info:
 servers:
   - url: 'http://localhost:3000/'
 paths:
-  /usuarios:
+  /users:
     get:
-      summary: Retorna una lista de usuarios
+      tags:
+        - users
+      summary: Get all users
+      operationId: getUsers
       responses:
         '200':
-          description: Una lista de usuarios
+          description: OK
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  type: object
-                  properties:
-                    nombre:
-                      type: string
-                    edad:
-                      type: integer
+                  $ref: '#/components/schemas/User'
+    post: 
+      tags: 
+        - users
+      summary: Create a user
+      operationId: createUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterDto'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        uuid:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+    UserCreateDto:
+      type: object
+      required:
+        - name
+        - email
+        - password
+      properties:
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          format: password
+    RegisterDto:
+      type: object
+      required:
+        - user
+      properties:
+        user:
+          $ref: '#/components/schemas/UserCreateDto'

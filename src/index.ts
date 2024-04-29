@@ -6,6 +6,8 @@ import swaggerUi from "swagger-ui-express";
 import YAML from "yamljs";
 
 import { apiValidator } from "./core/middlewares/schema-validator.middleware";
+import userRoute from './routes/user.route';
+import { createTResult } from './core/mappers/tresult.mappers';
 
 // Crear una nueva instancia de express
 const app = express();
@@ -26,11 +28,25 @@ app.use(
 );
 app.use(apiValidator());
 
+app.use("/users", userRoute);
 
 // Crear una ruta
 app.get('/', (req, res) => {
   res.send('Hola mundo!');
 });
+
+app.use(
+  (
+    err: any,
+    req: express.Request,
+    res: express.Response,
+    next: express.NextFunction
+  ) => {
+    res
+      .status(err.status || 500)
+      .json(createTResult<any>(null, [err.message, err.errors]));
+  }
+);
 
 // Iniciar el servidor
 app.listen(PORT, () => {
