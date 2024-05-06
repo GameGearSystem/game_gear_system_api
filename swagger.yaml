@@ -28,6 +28,8 @@ paths:
         - games
       summary: Create a game
       operationId: createGame
+      security:
+        - bearerAuth: []  # El nombre debe coincidir con el definido en components/securitySchemes
       requestBody:
         content:
           application/json:
@@ -46,6 +48,8 @@ paths:
         - games
       summary: Get game by uuid
       operationId: getGame
+      security:
+        - bearerAuth: []  # El nombre debe coincidir con el definido en components/securitySchemes
       parameters:
         - name: uuid
           in: path
@@ -65,6 +69,8 @@ paths:
         - games
       summary: Update game by uuid
       operationId: updateGame
+      security:
+        - bearerAuth: []  # El nombre debe coincidir con el definido en components/securitySchemes
       parameters:
         - name: uuid
           in: path
@@ -89,6 +95,8 @@ paths:
         - games
       summary: Delete game by uuid
       operationId: deleteGame
+      security:
+        - bearerAuth: []  # El nombre debe coincidir con el definido en components/securitySchemes
       parameters:
         - name: uuid
           in: path
@@ -121,6 +129,8 @@ paths:
         - devices
       summary: Create a device
       operationId: createDevice
+      security:
+        - bearerAuth: []  # El nombre debe coincidir con el definido en components/securitySchemes
       requestBody:
         content:
           application/json:
@@ -139,6 +149,8 @@ paths:
         - devices
       summary: Get device by uuid
       operationId: getDevice
+      security:
+        - bearerAuth: []  # El nombre debe coincidir con el definido en components/securitySchemes
       parameters:
         - name: uuid
           in: path
@@ -158,6 +170,8 @@ paths:
         - devices
       summary: Update device by uuid
       operationId: updateDevice
+      security:
+        - bearerAuth: []  # El nombre debe coincidir con el definido en components/securitySchemes
       parameters:
         - name: uuid
           in: path
@@ -182,6 +196,8 @@ paths:
         - devices
       summary: Delete device by uuid
       operationId: deleteDevice
+      security:
+        - bearerAuth: []  # El nombre debe coincidir con el definido en components/securitySchemes
       parameters:
         - name: uuid
           in: path
@@ -198,6 +214,8 @@ paths:
         - users
       summary: Get all users
       operationId: getUsers
+      security:
+        - bearerAuth: []  # El nombre debe coincidir con el definido en components/securitySchemes
       responses:
         '200':
           description: OK
