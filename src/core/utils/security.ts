@@ -18,5 +18,11 @@ export const generateToken = async (email: string) =>
     expiresIn: '1d',
   });
 
-export const verifyToken = async (token: string) =>
-  jwt.verify(token, secretKey);
+export const verifyToken = (token: string) => {
+  try {
+    const decoded = jwt.verify(token, secretKey);
+    return { valid: true, decoded };
+  } catch (error) {
+    return { valid: false, error };
+  }
+};

@@ -37,7 +37,7 @@ model Device {
   updatedAt DateTime @updatedAt
   active    Boolean  @default(true)
 
-  name    String
+  name    String @unique
   description String?
 
   requeriments Requeriment[]
@@ -50,7 +50,7 @@ model Game {
   updatedAt DateTime @updatedAt
   active    Boolean  @default(true)
 
-  name   String
+  name   String @unique
   description String?
   image_url String?
 

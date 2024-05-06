@@ -6,8 +6,10 @@ import swaggerUi from "swagger-ui-express";
 import YAML from "yamljs";
 
 import { apiValidator } from "./core/middlewares/schema-validator.middleware";
-import userRoute from './routes/user.route';
 import { createTResult } from './core/mappers/tresult.mappers';
+import userRoute from './routes/user.route';
+import gameRoute from './routes/game.route';
+import deviceRoute from './routes/device.route';
 
 // Crear una nueva instancia de express
 const app = express();
@@ -29,6 +31,8 @@ app.use(
 app.use(apiValidator());
 
 app.use("/users", userRoute);
+app.use("/games", gameRoute);
+app.use("/devices", deviceRoute);
 
 // Crear una ruta
 app.get('/', (req, res) => {

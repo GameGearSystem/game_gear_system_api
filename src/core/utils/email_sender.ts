@@ -6,7 +6,7 @@ export const sendConfirmationEmail = async (name: string, email: string, token: 
     const filePath = path.join(__dirname, './templates/confirmation.html');
 
     const html = await fs.promises.readFile(filePath, 'utf8');
-    const confirmationUrl = `http://localhost:4000/users/confirmation?token=${token}`;
+    const confirmationUrl = `http://localhost:3000/users/confirmation?token=${token}`;
     const personalizedHtml = html.replace("{{confirmationUrl}}", confirmationUrl).replace("{{userName}}", name);
     // Send mail with defined transport object
     await transporter.sendMail({
@@ -24,7 +24,7 @@ export const sendResetPasswordEmail = async (name: string, email: string, token:
     const filePath = path.join(__dirname, './templates/reset-password.html');
 
     const html = await fs.promises.readFile(filePath, 'utf8');
-    const resetPasswordUrl = `http://localhost:4000/users/reset_password?token=${token}`;
+    const resetPasswordUrl = `http://localhost:3000/users/reset_password?token=${token}`;
     const personalizedHtml = html.replace("{{resetPasswordUrl}}", resetPasswordUrl).replace("{{userName}}", name);
     // Send mail with defined transport object
     await transporter.sendMail({

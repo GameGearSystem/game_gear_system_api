@@ -13,3 +13,17 @@ export interface UserCreateDto {
     password: string;
     confirmed_token: string;
 }
+
+export interface UserLoginDto {
+    email: string;
+    password: string;
+}
+
+export interface UserConfirmDto {
+    email: string;
+}
+
+export interface UserResetPasswordDto {
+    token: string;
+    password: string;
+}

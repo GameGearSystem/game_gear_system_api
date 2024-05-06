@@ -11,4 +11,4 @@ export const UserEntityToDto = (user: User): UserDto => {
 
 export const UsersEntityToDto = (users: User[]): UserDto[] => {
     return users.map(user => UserEntityToDto(user));
-}  
+} 
